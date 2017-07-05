@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 #
 # Python Module to externalise all Initio/RoboHAT specific hardware
 #

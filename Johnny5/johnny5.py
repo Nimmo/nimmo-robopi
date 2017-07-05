@@ -5,6 +5,7 @@ import os
 
 settings = {}
 
+
 def init():
     global settings
     if os.path.exists("johnny_settings.json"):
@@ -13,10 +14,9 @@ def init():
         settings["tilt_centre"] = 0
         settings["rotation_angle"] = 0
         settings["speed"] = 100
-        
+        json.dumps(settings,open("johnny_settings.json","w"))
+
     robohat.init()
-    #robohat.startServos()
-    #robohat.setServo(0,settings["tilt_centre"])
     robohat.setServo(1,settings["rotation_angle"])
 
 
@@ -24,25 +24,26 @@ def left_pulse():
     global settings
     
     # Check left
-    robohat.setServo(1,settings["rotation_angle"] - 45)
-    time.sleep(0.2)
+    robohat.setServo(settings["rotation_angle"] - 45)
+    time.sleep(0.3)
     distance = int(robohat.getDistance())
 
     # Face forwards
-    robohat.setServo(1,settings["rotation_angle"])
+    robohat.setServo(settings["rotation_angle"])
 
     return distance
+
 
 def right_pulse():
     global settings
     
     # Check right
-    robohat.setServo(1,settings["rotation_angle"] + 45)
-    time.sleep(0.2)
+    robohat.setServo(settings["rotation_angle"] + 45)
+    time.sleep(0.3)
     distance = int(robohat.getDistance())
 
     # Face forwards
-    robohat.setServo(1,settings["rotation_angle"])
+    robohat.setServo(settings["rotation_angle"])
 
     return distance    
 
@@ -55,11 +56,9 @@ def side_distances():
     global settings
 
     left_distance = left_pulse()
-    
 
     # Check right
     right_distance = right_pulse()
-
     
     # Decide left/Right
     if left_distance >= right_distance:
@@ -113,6 +112,6 @@ if __name__ == "__main__":
                     time.sleep(1)
 
     except KeyboardInterrupt:
-        print("No! No disassemble Number 5")
+        print("No! No disassemble Number 5!")
     finally:
         robohat.cleanup()
