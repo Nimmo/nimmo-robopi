@@ -1,7 +1,9 @@
-if [ ! -d ~/robohat ]; then
-  mkdir ~/robohat
+#!/bin/bash
+
+if [ ! -d robohat ]; then
+  mkdir robohat
 fi
-cd ~/robohat
+robohat
 wget -q http://4tronix.co.uk/initio/servod.xxx -O servod
 wget -q http://4tronix.co.uk/robohat/robohat.py -O robohat.py
 wget -q http://4tronix.co.uk/robohat/motorTest.py -O motorTest.py
